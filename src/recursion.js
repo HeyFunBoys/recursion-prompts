@@ -4,50 +4,80 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example:  5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5);  // 120
-var factorial = function(n) {
+var factorial = function( n ) {
   if( n < 0 ){
     return null;
-  } else if( n === 0 ){
+  }else if( n === 0 ){
     return 1;
-  } else { 
-    return n * factorial(n - 1);
+  }else{ 
+    return n * factorial( n - 1 );
   }
 };
 
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
-var sum = function(array) {
-  var copy = array.slice(0)
-  if(copy.length === 0){
+var sum = function( array ) {
+  var copy = array.slice( 0 )
+  if( copy.length === 0 ){
     return 0;
-  } else if(copy.length === 1) {
+  }else if( copy.length === 1 ){
     return copy.pop();
-  } else {
-    return copy.pop() + sum(copy);
+  }else{
+    return copy.pop() + sum( copy );
   }
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // Example: arraySum([1,[2,3],[[4]],5]); // 15
-var arraySum = function(array) {
+var arraySum = function( array ) {
   var copy = array.slice(0);
   if( copy.length === 0 ){
     return 0;
-  } else if( Array.isArray(copy[copy.length - 1]) ) {
-    return arraySum(copy.pop()) + arraySum(copy);
-  } else {
-    return copy.pop() + arraySum(copy);
+  }else if( Array.isArray( copy[copy.length - 1] ) ){
+    return arraySum( copy.pop() ) + arraySum( copy );
+  }else{
+    return copy.pop() + arraySum( copy );
   } 
 };
 
 // 4. Check if a number is even.
-var isEven = function(n) {
+var isEven = function( n ) {
+  if( n >= 0 ){
+    if( n === 1 ) {
+      return false;
+    }else if( n == 0 ){
+      return true;
+    }else{
+      return isEven( n - 2 );
+    }
+  }else{
+    if( n === -1 ){
+      return false;
+    }else if( n === 0 ){
+      return true;
+    }else{
+      return isEven( n + 2 );
+    }
+  } 
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var sumBelow = function(n) {
+var sumBelow = function( n ) {
+  if( n > 0 ){
+    if( n === 0 ){
+      return 0;
+    }else{
+      return n - 1 + sumBelow( n - 1 );
+    }
+  }else{
+    if( n === 0 ){
+      return 0;
+    }else{
+      return n + 1 + sumBelow( n + 1 );
+    }
+  }
 };
 
 // 6. Get the integers in range (x, y).
