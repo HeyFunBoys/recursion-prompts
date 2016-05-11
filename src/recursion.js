@@ -152,8 +152,8 @@ var modulo = function( x, y ){
     return NaN;
   }else if( x === 0 ){
     return 0;
-  }else if( ( x > 0 && y > 0) || ( x < 0 && y < 0 ) ){
-    if( ( y > 0 && x < y) || ( y < 0 && x > y ) ){
+  }else if( ( x > 0 && y > 0 ) || ( x < 0 && y < 0 ) ){
+    if( ( y > 0 && x < y ) || ( y < 0 && x > y ) ){
       return x;
     }else{
       return modulo( x - y, y );
@@ -169,7 +169,24 @@ var modulo = function( x, y ){
 
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
-var multiply = function(x, y) {
+var multiply = function( x, y ){
+  if( x === 1 ){
+    return y;
+  }else if( y === 1 ){
+    return x;
+  }else if( x > 0 && y > 0 ){
+    if( x > y ){
+      return x + multiply( x, y - 1 );
+    }else{
+      return y + multiply( x - 1, y );
+    }
+  }else if( x < 0 && y > 0 ){
+    return -multiply( -x, y );
+  }else if( x > 0 && y < 0 ){
+    return -multiply( x, -y );
+  }else{
+    return multiply( -x, -y );
+  } 
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
