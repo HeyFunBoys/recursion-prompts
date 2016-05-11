@@ -111,15 +111,35 @@ var exponent = function( base, exp ){
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
-var powerOfTwo = function(n) {
+var powerOfTwo = function( n ){
+  if( n === 1 ){
+    return true;
+  }else if( n < 1){
+    return false;
+  }else{
+    return powerOfTwo( n / 2 );
+  }
 };
 
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function(string) {
+var reverse = function( string ){
+  if( string ){
+    return string.slice( string.length - 1 ).concat(reverse ( string.slice( 0, string.length - 1 ) ) );
+  }else{
+    return '';
+  }
 };
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function(string) {
+var palindrome = function( string ){
+  var copy = string.replace( ' ', '' ).toLowerCase();
+  if( copy.length === 1 ){
+    return true;
+  }else if( copy[0] === copy[copy.length - 1] ){
+    return palindrome( copy.slice( 1, copy.length - 1 ) );
+  }else{
+    return false;
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -127,7 +147,24 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
-var modulo = function(x, y) {
+var modulo = function( x, y ){
+  if( y === 0 ){
+    return NaN;
+  }else if( x === 0 ){
+    return 0;
+  }else if( ( x > 0 && y > 0) || ( x < 0 && y < 0 ) ){
+    if( ( y > 0 && x < y) || ( y < 0 && x > y ) ){
+      return x;
+    }else{
+      return modulo( x - y, y );
+    }
+  }else{
+    if( ( y < 0 && x + y < 0 ) || ( y > 0 && x + y > 0 ) ){
+      return x;
+    }else{
+      return modulo( x + y, y );
+    }
+  }
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator  or
